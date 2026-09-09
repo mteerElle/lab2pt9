@@ -132,5 +132,26 @@ public class Main {
     }
     //---- do maybe date ranges 3.3
 
+    static dateInterval dateIntervalIntersect(dateInterval first, dateInterval second){
+            if((comesBefore(second.start(),first.end())) && comesBefore(first.start(),second.start())){
+                return new dateInterval(second.start(),first.end());
+            }
+            return new dateInterval(first.start(), second.end());
+
+    }
+
+    public static dateInterval nullableDateIntervalIntersect(dateInterval first, dateInterval second){
+        if((first == null)||(second==null)){
+            return null;
+        }
+        if(!dateOverlap(first, second)){
+            return null;
+        }
+        else{
+            return dateIntervalIntersect(first,second);
+        }
+    }
+
+
 
 }

@@ -30,4 +30,20 @@ class MainTest {
         Main.date afta = new Main.date(2,1,1);
         assertEquals(true,Main.comesBefore(before, afta));
     }
+    @Test
+    void dateIntervalDays(){
+        //the fuck
+    }
+    @Test
+    void dateOverlap(){
+        //???/
+    }
+    @Test
+    void dateIntervalIntersect(){
+
+    }
+    @Test
+    void nullableDateIntervalIntersect(){
+
+    }
 }
