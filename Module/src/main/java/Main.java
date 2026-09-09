@@ -11,10 +11,126 @@ public class Main {
         // to see how IntelliJ IDEA suggests fixing it.
         IO.println(String.format("Hello and welcome!"));
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + Main.addSix(i));
+
+    }
+    //this record the date
+    public record date(int day, int month, int year) {
+        public date {
+            if(day > daysInMonth(month)) {
+                throw new IllegalArgumentException("Not valid date dumbass");
+            }
+
         }
     }
+
+    date date1 = new date(1,1,2001);
+    date date2 = new date(2,2,2002);
+    date date3 = new date(3,3,2003);
+
+    //returns amount of days in given month
+    public static int daysInMonth(int month){
+        if((month<=0)||(month>12) ){
+            throw new IllegalArgumentException("Thats not a month dumbass");
+        }
+        else if(month ==2){
+            return 28;
+        }
+        else if ((month==4)|| (month ==6)||(month== 9)||(month==11)){
+            return 30;
+        }
+        else {
+            return 31;
+        }
+    }
+    //returns the next date for the day after date
+    public static date tomorrow(date today){
+        int day;
+        int mon;
+        int yr;
+        if(today.day() == daysInMonth( today.month() )){
+            day =1;
+            if(today.month() ==12){
+                yr = today.year() +1;
+                mon = 1;
+                return new date(day,mon,yr);
+            }
+            mon=today.month()+1;
+            yr = today.year();
+            return new date(day,mon,yr);
+        }
+        day = today.day() +1;
+        mon = today.month();
+        yr = today.year();
+        return new date(day,mon,yr);
+
+    }
+    // return num day since jan first (noon of jan to noon of date)
+    public static int dayOfYear(date today){
+        int days = 0;
+        for(int i = 1; i < today.month(); i++){
+            days+=daysInMonth(i);
+        }
+        days+=today.day();
+        return days-1;
+    }
+    //return true if day 1 comes before day 2, if not, false
+    public static boolean comesBefore(date day1, date day2){
+        if (day1.year() == day2.year()){
+            if(day1.month()==day2.month()){
+                if(day1.day() < day2.day()){
+                    return true;
+                }
+                return false;
+            }
+            else {
+                if(day1.month()< day2.month()){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        else{
+            if(day1.year() < day2.year()){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+    }
+
+    //records date intervals man idek
+    public record dateInterval( date start, date end){
+        public dateInterval{
+            if (comesBefore(start,end) == false){
+                throw new IllegalArgumentException("ts isn't in right order cuzzo");
+            }
+        }
+
+    }
+    dateInterval d1 = new dateInterval(date1,date2);
+    dateInterval d2 = new dateInterval(date2,date3);
+    dateInterval d3 = new dateInterval(date1, date3);
+
+    //returns num of days between intervals DO TEST
+    public static int dateIntervalDays(dateInterval inter){
+        return dayOfYear(inter.end()) - dayOfYear(inter.start());
+    }
+
+    // returns true if periods synch at least once, false if not DO TEST FOR
+    public static boolean dateOverlap( dateInterval int1, dateInterval int2){
+        if( (comesBefore(int2.start(),int1.end())) && comesBefore(int1.start(),int2.start())){
+            return true;
+        }
+        else if (comesBefore(int1.start(), int2.end()) && comesBefore(int2.end(), int1.end())){
+            return true;
+        }
+        else
+            return false;
+    }
+    //---- do maybe date ranges 3.3
+
+
 }
