@@ -167,22 +167,90 @@ public class Main {
             case DateList( date first , DateList rest) -> 1 + listLen(rest);
         };
     }
-
+    // returns smallest dat in list of dates
     static date minDate( DateList dates){
-        date min= dates.first();
-        return switch(dates, min){
-            case null -> null;
+         switch(dates){
+             case null -> {return null;}
             case DateList(date first, DateList rest)-> {
-                if (comesBefore(first, minDate( rest ))){
+                date restMin = minDate(rest);
+                if (restMin == null) {
                     return first;
                 }
-                else{
-                    return 
-            }
-
-
+                if (comesBefore(first, restMin)) {
+                    return first;
+                }
+                else {
+                    return restMin;
+                }
             }
         }
     }
+    // returns largest date in list of dates
+
+    static date maxDate(DateList dates){
+        switch (dates) {
+            case null -> {
+                return null;
+            }
+            case DateList(date first, DateList rest) -> {
+                date restMax = maxDate(rest);
+                if(restMax == null){
+                    return first;
+                }
+                if (comesBefore(first, restMax)){
+                    return restMax;
+                }
+                else{
+                    return first;
+                }
+            }
+        }
+    }
+    //returns shortest date interval
+    static dateInterval dateCover(DateList list){
+        date min = minDate(list);
+        date max = maxDate(list);
+
+        if(min==null){
+            return null;
+        }
+        return new dateInterval(min,max);
+    }
+    //returns new list where date is mapped to following date whatever that means ig
+    static DateList allTomorrows(DateList dates){
+        switch (dates){
+            case null ->{
+                return null;
+            }
+            case DateList(date first, DateList rest) -> {
+                return new DateList(tomorrow(first), allTomorrows(rest));
+            }
+        }
+    }
+
+    // returns list wit new end on it
+    static DateList addToEnd(DateList dates, date newDate){
+        switch(dates){
+            case null -> {
+                return new DateList(newDate, null);
+            }
+            case DateList(date first, DateList rest)->{
+                return new DateList(first, addToEnd(rest, newDate));
+            }
+        }
+    }
+    // creates new list including all elements of 2 lists
+    static DateList append(DateList first, DateList second){
+        switch(first){
+            case null ->{
+                return second;
+            }
+            case DateList(date firstDate, DateList rest)->{
+                return new DateList(firstDate, append(rest, second));
+            }
+        }
+    }
+
+
 
 }

@@ -32,7 +32,11 @@ class MainTest {
     }
     @Test
     void dateIntervalDays(){
-        /
+        Main.dateInterval int1 = new Main.dateInterval(new Main.date(1,1, 2020), new Main.date(1,1,2020));
+        Main.dateInterval int2 = new Main.dateInterval(new Main.date(1,1, 2020), new Main.date(1,1,2020));
+        assertEquals(0, Main.dateIntervalDays(int1));
+        assertEquals(9, Main.dateIntervalDays(int2));
+
     }
     @Test
     void dateOverlap(){
