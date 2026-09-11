@@ -158,19 +158,27 @@ public class Main {
     // STOPPED HERE HAVE NO IDEA HOW TO DO THIS COOL
     // how to represent linked list dates??? ERROR HERE CHECk
     public record DateList(date first, DateList rest){}
+
+
     // returns length of lest of dates
     public static int listLen( DateList dates ){
         return switch (dates){
             case null -> 0;
-            case DateList( first , rest) -> 1 + listlen(rest);
+            case DateList( date first , DateList rest) -> 1 + listLen(rest);
         };
     }
 
     static date minDate( DateList dates){
-        return switch(dates){
+        date min= dates.first();
+        return switch(dates, min){
             case null -> null;
-            case DateList(first, rest)->{
-                date restmin = minDate(rest);
+            case DateList(date first, DateList rest)-> {
+                if (comesBefore(first, minDate( rest ))){
+                    return first;
+                }
+                else{
+                    return 
+            }
 
 
             }
