@@ -32,7 +32,7 @@ class MainTest {
     }
     @Test
     void dateIntervalDays(){
-        //the fuck
+        /
     }
     @Test
     void dateOverlap(){
