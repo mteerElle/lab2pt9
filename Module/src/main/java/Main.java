@@ -80,7 +80,13 @@ public class Main {
                 if(day1.day() < day2.day()){
                     return true;
                 }
-                return false;
+                else{
+                    if (day1.day()==day2.day()){
+                        return true;
+                    }
+                    return false;
+                }
+
             }
             else {
                 if(day1.month()< day2.month()){

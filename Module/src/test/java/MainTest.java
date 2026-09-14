@@ -40,18 +40,34 @@ class MainTest {
     }
     @Test
     void dateOverlap(){
-
-
+        Main.dateInterval fistint = new Main.dateInterval(new Main.date(1,1,2026), new Main.date(5,1,2026));
+        Main.dateInterval sint = new Main.dateInterval(new Main.date(3,1,2026), new Main.date(7,1,2026));
+        Main.dateInterval tist = new Main.dateInterval(new Main.date(18,1,2026), new Main.date(20,1,2026));
+        assertEquals(true,Main.dateOverlap(fistint,sint));
+        assertEquals(false, Main.dateOverlap(fistint,tist));
 
     }
     @Test
     void dateIntervalIntersect(){
-
+        Main.dateInterval exp = new Main.dateInterval(new Main.date(3,1,2026), new Main.date(6,1,2026));
+        Main.dateInterval firstint = new Main.dateInterval(new Main.date(1,1, 2026), new Main.date(12,12,2026));
+        Main.dateInterval secint = new Main.dateInterval(new Main.date(3,1,2026), new Main.date(6,1,2026));
+        assertEquals(exp, Main.dateIntervalIntersect(firstint,secint));
     }
     @Test
     void nullableDateIntervalIntersect(){
+        assertEquals(null, Main.nullableDateIntervalIntersect(null,null));
 
     }
+
+
+
+
+
+
+
+
+
     @Test
     void listLen(){
         assertEquals(0,Main.listLen(null));
@@ -111,7 +127,7 @@ class MainTest {
         Main.date d2 = new Main.date(1,2,2026);
         Main.date d3 = new Main.date(1,3,2026);
         Main.DateList list = new Main.DateList(d1,new Main.DateList(d3, new Main.DateList(d2, null)));
-        
+
     }
 
 
