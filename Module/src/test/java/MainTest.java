@@ -33,14 +33,16 @@ class MainTest {
     @Test
     void dateIntervalDays(){
         Main.dateInterval int1 = new Main.dateInterval(new Main.date(1,1, 2020), new Main.date(1,1,2020));
-        Main.dateInterval int2 = new Main.dateInterval(new Main.date(1,1, 2020), new Main.date(1,1,2020));
+        Main.dateInterval int2 = new Main.dateInterval(new Main.date(1,1, 2020), new Main.date(10,1,2020));
         assertEquals(0, Main.dateIntervalDays(int1));
         assertEquals(9, Main.dateIntervalDays(int2));
 
     }
     @Test
     void dateOverlap(){
-        //???/
+
+
+
     }
     @Test
     void dateIntervalIntersect(){
@@ -50,4 +52,32 @@ class MainTest {
     void nullableDateIntervalIntersect(){
 
     }
+    @Test
+    void listLen(){
+        assertEquals(0,Main.listLen(null));
+        Main.DateList first = new Main.DateList(new Main.date(1,1,2026),null);
+        assertEquals(1,Main.listLen(first));
+
+    }
+
+    @Test
+    void minDate(){
+        Main.date d1 = new Main.date(1,1,2026);
+        Main.date d2 = new Main.date(1,2,2026);
+        Main.date d3 = new Main.date(1,3,2026);
+        Main.DateList list = new Main.DateList(d1,new Main.DateList(d3, new Main.DateList(d2, null)));
+        assertEquals(null, Main.minDate(null));
+        assertEquals(d1,Main.minDate(new Main.DateList(d1,null)));
+        assertEquals(d1,Main.minDate(list));
+
+    }
+    @Test
+    void maxDate(){
+        Main.date d1 = new Main.date(1,1,2026);
+        Main.date d2 = new Main.date(1,2,2026);
+        Main.date d3 = new Main.date(1,3,2026);
+        Main.DateList list = new Main.DateList(d1,new Main.DateList(d3, new Main.DateList(d2, null)));
+    }
+
+
 }

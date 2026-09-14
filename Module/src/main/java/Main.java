@@ -110,6 +110,8 @@ public class Main {
         }
 
     }
+
+
     dateInterval d1 = new dateInterval(date1,date2);
     dateInterval d2 = new dateInterval(date2,date3);
     dateInterval d3 = new dateInterval(date1, date3);
@@ -121,22 +123,29 @@ public class Main {
 
     // returns true if periods synch at least once, false if not DO TEST FOR
     public static boolean dateOverlap( dateInterval int1, dateInterval int2){
-        if( (comesBefore(int2.start(),int1.end())) && comesBefore(int1.start(),int2.start())){
-            return true;
-        }
-        else if (comesBefore(int1.start(), int2.end()) && comesBefore(int2.end(), int1.end())){
-            return true;
-        }
-        else
-            return false;
+        return comesBefore(int1.start(),int2.end()) && comesBefore(int2.start(), int1.end());
     }
     //---- do maybe date ranges 3.3
 
     static dateInterval dateIntervalIntersect(dateInterval first, dateInterval second){
-            if((comesBefore(second.start(),first.end())) && comesBefore(first.start(),second.start())){
-                return new dateInterval(second.start(),first.end());
-            }
-            return new dateInterval(first.start(), second.end());
+           if(!dateOverlap(first,second)){
+               return null;
+           }
+           date start;
+           if(comesBefore(first.start(),second.start())){
+               start = second.start();
+           }
+           else{
+               start = first.start();
+           }
+           date end;
+           if(comesBefore(first.end(),second.end())){
+               end = first.end();
+           }
+           else{
+               end = second.end();
+           }
+           return new dateInterval(start,end);
 
     }
 
