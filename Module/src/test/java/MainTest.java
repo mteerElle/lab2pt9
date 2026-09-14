@@ -78,6 +78,41 @@ class MainTest {
         Main.date d3 = new Main.date(1,3,2026);
         Main.DateList list = new Main.DateList(d1,new Main.DateList(d3, new Main.DateList(d2, null)));
     }
+    @Test
+    void dateCover(){
+        assertEquals(null,Main.dateCover(null));
+        Main.date d1 = new Main.date(1,1,2026);
+        Main.date d2 = new Main.date(1,2,2026);
+        Main.date d3 = new Main.date(1,3,2026);
+        Main.DateList list = new Main.DateList(d1,new Main.DateList(d3, new Main.DateList(d2, null)));
+        Main.dateInterval exp = new Main.dateInterval(d1,d3);
+        assertEquals(exp, Main.dateCover(list));
+    }
+    @Test
+    void allTomorrows(){
+        Main.date d1 = new Main.date(1,1,2026);
+        Main.date d2 = new Main.date(1,2,2026);
+        Main.date d3 = new Main.date(1,3,2026);
+        Main.DateList list = new Main.DateList(d1,new Main.DateList(d3, new Main.DateList(d2, null)));
+        assertEquals(null, Main.allTomorrows(null));
+
+    }
+    @Test
+    void addToEnd(){
+        Main.date d1 = new Main.date(1,1,2026);
+        Main.date d2 = new Main.date(1,2,2026);
+        Main.date d3 = new Main.date(1,3,2026);
+        Main.DateList list = new Main.DateList(d1,new Main.DateList(d3, new Main.DateList(d2, null)));
+
+    }
+    @Test
+    void append(){
+        Main.date d1 = new Main.date(1,1,2026);
+        Main.date d2 = new Main.date(1,2,2026);
+        Main.date d3 = new Main.date(1,3,2026);
+        Main.DateList list = new Main.DateList(d1,new Main.DateList(d3, new Main.DateList(d2, null)));
+        
+    }
 
 
 }
